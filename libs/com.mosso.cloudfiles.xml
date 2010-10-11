@@ -1,0 +1,2040 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>com.mosso.cloudfiles</name>
+    </assembly>
+    <members>
+        <member name="T:com.mosso.cloudfiles.domain.response.IResponse">
+            <summary>
+            The interface for all responses returned from cloudfiles
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.IResponse.Status">
+            <summary>
+            A property representing the status of the request from cloudfiles
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.IResponse.Headers">
+            <summary>
+            A collection of key-value pairs representing the headers returned from each request
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.Interfaces.ICloudFilesResponse.Metadata">
+            <summary>
+            dictionary of meta tags assigned to this storage item
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.Exceptions.InsecureUrlException">
+            <summary>
+            Description of InsecureUrlException.
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.IConnection.StorageUrl">
+            <summary>
+            The storage url used to interact with cloud files
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.IConnection.AuthToken">
+            <summary>
+            the session based token used to ensure the user was authenticated
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.AccountInformation">
+            <summary>
+            encapsulates the container count and bytes used by a customer
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.AccountInformation.#ctor(System.String,System.String)">
+            <summary>
+            the account information of a customer
+            </summary>
+            <param name="containerCount">the number of containers a customer owns</param>
+            <param name="bytesUsed">the bytes used by a customer</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference arguments are null</exception>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.AccountInformation.ContainerCount">
+            <summary>
+            the number of the containers a customer owns
+            </summary>
+            <return>number of containers</return>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.AccountInformation.BytesUsed">
+            <summary>
+            the bytes used by a customer
+            </summary>
+            <return>number of bytes</return>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.GetAccountInformation">
+            <summary>
+            GetAccountInformation
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.GetAccountInformation.#ctor(System.String)">
+            <summary>
+            GetAccountInformation constructor
+            </summary>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.GetAccountInformationSerialized.#ctor(System.String,com.mosso.cloudfiles.domain.request.Format)">
+            <summary>
+            GetAccountInformationSerialized constructor
+            </summary>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.MarkContainerAsPublic.#ctor(System.String,System.String)">
+            <summary>
+            Adds this container to the list of containers to be served up publicly
+            </summary>
+            <param name="cdnManagementUrl">The URL that will be used for accessing content from CloudFS</param>
+            <param name="containerName">The name of the container to make public on the CDN</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.MarkContainerAsPublic.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            Adds this container to the list of containers to be served up publicly
+            </summary>
+            <param name="cdnManagementUrl">The URL that will be used for accessing content from CloudFS</param>
+            <param name="containerName">The name of the container to make public on the CDN</param>
+            <param name="timeToLiveInSeconds">The maximum time (in seconds) content should be kept alive on the CDN before it checks for freshness.</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.SetPublicContainerDetails.#ctor(System.String,System.String,System.Boolean,System.Boolean,System.Int32,System.String,System.String)">
+            <summary>
+            Assigns various details to containers already publicly available on the CDN
+            </summary>
+            <param name="cdnManagementUrl">The CDN URL</param>
+            <param name="containerName">The name of the container to update the details for</param>
+            <param name="isCdnEnabled">Sets whether or not specified container is available on the CDN</param>
+            <param name="isLoggingEnabled">sets whether or not logging is enabled</param>
+            <param name="timeToLiveInSeconds">the time limit for the container to be public</param>
+            <param name="agentacl"></param>
+            <param name="refacl"></param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.response.CloudFilesResponse">
+            <summary>
+            Represents the response information from a CloudFiles request
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.CloudFilesResponse.Status">
+            <summary>
+            A property representing the HTTP Status code returned from cloudfiles
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.CloudFilesResponse.Headers">
+            <summary>
+            A collection of key-value pairs representing the headers returned from the create container request
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.CloudFilesResponse.Metadata">
+            <summary>
+            dictionary of meta tags assigned to this storage item
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.response.CloudFilesResponseWithContentBody">
+            <summary>
+            This class wraps the response from the cloud files request when expecting a content body
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.response.IResponseWithContentBody">
+            <summary>
+            An interface representing responses with a content body
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.IResponseWithContentBody.ContentStream">
+            <summary>
+            A property representing the stream returned from cloudfiles
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.IResponseWithContentBody.ContentBody">
+            <summary>
+            A property representing the parsed content body broken down line by line
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.IResponseWithContentBody.ContentLength">
+            <summary>
+            A property representing the length, in bytes, of the content body
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.IResponseWithContentBody.ContentType">
+            <summary>
+            A property representing the MIME type of the response body
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.response.CloudFilesResponseWithContentBody.#ctor">
+            <summary>
+            The default constructor for creating this response
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.response.CloudFilesResponseWithContentBody.Dispose">
+            <summary>
+            This method must be called once the stream has been processed to release the resources associated with the request
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.CloudFilesResponseWithContentBody.Status">
+            <summary>
+            A property containing the HTTP status code from the transaction
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.CloudFilesResponseWithContentBody.Headers">
+            <summary>
+            A collection of key-value pairs representing the headers returned from the get container item list request
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.CloudFilesResponseWithContentBody.ContentBody">
+            <summary>
+            A property containing the list of lines from the content body
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.CloudFilesResponseWithContentBody.ContentType">
+            <summary>
+            A property representing the MIME type of the content in the body of the response
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.CloudFilesResponseWithContentBody.ContentLength">
+            <summary>
+            A property representing the length of the content in the body of the response
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.CloudFilesResponseWithContentBody.ContentStream">
+            <summary>
+            A property representing the stream returned from the response
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.StorageItemInformation.#ctor(System.Net.WebHeaderCollection)">
+            <summary>
+            constructor
+            </summary>
+            <param name="headers">collection of headers assigned to this storage item</param>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.StorageItemInformation.ETag">
+            <summary>
+            entity tag used to determine if any content changed in transfer - http://en.wikipedia.org/wiki/HTTP_ETag
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.StorageItemInformation.ContentType">
+            <summary>
+            http content type of the storage item
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.StorageItemInformation.ContentLength">
+            <summary>
+            http content length of the storage item
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.StorageItemInformation.Metadata">
+            <summary>
+            dictionary of meta tags assigned to this storage item
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.utils.EnumHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.EnumHelper.GetDescription(System.Enum)">
+            <summary>
+            
+            </summary>
+            <param name="enumType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.ContainerNotEmptyException">
+            <summary>
+            This exception is thrown when the user attempts to delete a container that still has storage objects associated with it
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.ContainerNotEmptyException.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.ContainerNotEmptyException.#ctor(System.String)">
+            <summary>
+            A constructor for more explicitly explaining the reason for failure
+            </summary>
+            <param name="msg">A message for describing the exception in detail</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.InvalidRangeHeaderException">
+            <summary>
+            This exception is thrown when the Range header contains invalid range values
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.InvalidRangeHeaderException.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.InvalidRangeHeaderException.#ctor(System.String)">
+            <summary>
+            An explicit constructor for describing the acceptable range header format
+            </summary>
+            <param name="msg">Used to more explicitly indicate the reason for failure</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.DateTimeHttpHeaderFormatException">
+            <summary>
+            This exception is thrown when the date is in a non-HTTP 1.1 compliant format
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.DateTimeHttpHeaderFormatException.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.DateTimeHttpHeaderFormatException.#ctor(System.String)">
+            <summary>
+            A constructor for describing the correct date formatting
+            </summary>
+            <param name="message">Used to be more explicit about the acceptable datetime format</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.NoContainersFoundException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.NoContainersFoundException.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.Container">
+            <summary>
+            Container
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.Container.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="containerName">Name of the container</param>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.Container.ByteCount">
+            <summary>
+            Size of the container
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.Container.ObjectCount">
+            <summary>
+            Number of items in the container
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.Container.Name">
+            <summary>
+            Name of the container
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.Container.TTL">
+            <summary>
+            The maximum time (in seconds) content should be kept alive on the CDN before it checks for freshness.
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.Container.CdnUri">
+            <summary>
+            The URI one can use to access objects in this container via the CDN. No time based URL stuff will be included with this URI
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.Container.ReferrerACL">
+            <summary>
+            Referrer ACL 
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.Container.UserAgentACL">
+            <summary>
+            User Agent ACL
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.DeleteContainer">
+            <summary>
+            DeleteContainer
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.DeleteContainer.#ctor(System.String,System.String)">
+            <summary>
+            DeleteContainer constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.ContainerNameException">Thrown when the container name is invalid</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.StorageItemNameException">Thrown when the object name is invalid</exception>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.DeleteStorageItem">
+            <summary>
+            DeleteStorageItem
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.DeleteStorageItem.#ctor(System.String,System.String,System.String)">
+            <summary>
+            DeleteStorageItem constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <param name="storageItemName">the name of the storage item to add meta information too</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.ContainerNameException">Thrown when the container name is invalid</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.StorageItemNameException">Thrown when the object name is invalid</exception>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.GetAuthentication">
+            <summary>
+            GetAuthentication
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.GetAuthentication.#ctor(com.mosso.cloudfiles.domain.UserCredentials)">
+            <summary>
+            GetAuthentication constructor
+            </summary>
+            <param name="userCreds">the UserCredentials instace to use when attempting authentication</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference arguments are null</exception>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.GetContainerItemList">
+            <summary>
+            GetContainerItemList
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.GetContainerItemList.#ctor(System.String,System.String,System.Collections.Generic.Dictionary{com.mosso.cloudfiles.GetItemListParameters,System.String})">
+            <summary>
+            GetContainerItemList constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <param name="requestParameters">dictionary of parameter filters to place on the request url</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.ContainerNameException">Thrown when the container name is invalid</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.GetContainerItemList.#ctor(System.String,System.String)">
+            <summary>
+            GetContainerItemList constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.RequestHeaderFields">
+            <summary>
+            possible http comparison header fields to apply to this request
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.GetStorageItem">
+            <summary>
+            GetStorageItem
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.GetStorageItem.#ctor(System.String,System.String,System.String)">
+            <summary>
+            GetStorageItem constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <param name="storageItemName">the name of the storage item to add meta information too</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.ContainerNameException">Thrown when the container name length exceeds the maximum container length allowed</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.GetStorageItem.#ctor(System.String,System.String,System.String,System.Collections.Generic.Dictionary{com.mosso.cloudfiles.domain.request.RequestHeaderFields,System.String})">
+            <summary>
+            GetStorageItem constructor with http comparison header fields
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <param name="storageItemName">the name of the storage item to add meta information too</param>
+            <param name="requestHeaderFields">dictionary of request header fields to apply to the request</param>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.ContainerNameException">Thrown when the container name is invalid</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.StorageItemNameException">Thrown when the object name is invalid</exception>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.response.GetStorageItemResponse">
+            <summary>
+            This class wraps the response from the get storage item request
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.response.GetStorageItemResponse.#ctor">
+            <summary>
+            The default constructor for creating instances of GetStorageItemResponse
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.response.GetStorageItemResponse.Dispose">
+            <summary>
+            This method must be called once the stream has been processed to release the resources associated with the request
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.response.GetStorageItemResponse.SaveStreamToDisk(System.String)">
+            <summary>
+            This method saves the stream from the response directly to a named file on disk
+            </summary>
+            <param name="filename">The file name to save the stream to locally</param>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.GetStorageItemResponse.Status">
+            <summary>
+            A property containing the HTTP status code from the transaction
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.GetStorageItemResponse.ContentBody">
+            <summary>
+            A property representing the binary information making up the storage item
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.GetStorageItemResponse.Headers">
+            <summary>
+            A collection of key-value pairs representing the headers returned from the get storage item request
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.GetStorageItemResponse.ContentLength">
+            <summary>
+            A property representing the size, in bytes, of the stream representing the storage item
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.GetStorageItemResponse.ContentType">
+            <summary>
+            A property representing the MIME type of the storage item
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.response.GetStorageItemResponse.ContentStream">
+            <summary>
+            A property representing the stream returned from the response
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.GetContainerInformation">
+            <summary>
+            GetContainerInformation
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.GetContainerInformation.#ctor(System.String,System.String)">
+            <summary>
+            GetContainerInformation constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.ContainerNameException">Thrown when the container name is invalid</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.GetContainerInformationSerialized.#ctor(System.String,System.String,com.mosso.cloudfiles.domain.request.Format)">
+            <summary>
+            GetContainerInformationSerialized constructor
+            </summary>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the parameters are null</exception>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.GetStorageItemInformation">
+            <summary>
+            GetStorageItemInformation
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.GetStorageItemInformation.#ctor(System.String,System.String,System.String)">
+            <summary>
+            GetStorageItemInformation constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <param name="storageItemName">the name of the storage item to add meta information too</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.ContainerNameException">Thrown when the container name is invalid</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.StorageItemNameException">Thrown when the object name is invalid</exception>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.GetContainers">
+            <summary>
+            GetContainers
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.GetContainers.#ctor(System.String)">
+            <summary>
+            GetContainers constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.CloudFilesRequest">
+            <summary>
+            Wraps requests to optionally handle proxy credentials and ssl
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.CloudFilesRequest.#ctor(System.Uri)">
+            <summary>
+            temp
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.CloudFilesRequest.#ctor(System.Net.HttpWebRequest)">
+            <summary>
+            Constructor without proxy credentials provided
+            </summary>
+            <param name="request">The request being sent to the server</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.CloudFilesRequest.#ctor(System.Net.HttpWebRequest,com.mosso.cloudfiles.domain.ProxyCredentials)">
+            <summary>
+            Constructor with proxy credentials provided
+            </summary>
+            <param name="request">The request being sent to the server</param>
+            <param name="proxyCredentials">Proxy credentials</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference arguments are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.CloudFilesRequest.GetResponse">
+            <summary>
+            GetRequest
+            </summary>
+            <returns>a HttpWebRequest object that has all the information to make a request against CloudFiles</returns>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.request.CloudFilesRequest.RequestType">
+            <summary>
+            RequestType
+            </summary>
+            <returns>the type of the request</returns>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.SetStorageItemMetaInformation">
+            <summary>
+            SetStorageItemMetaInformation
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.SetStorageItemMetaInformation.#ctor(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            SetStorageItemMetaInformation constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <param name="storageItemName">the name of the storage item to add meta information too</param>
+            <param name="metadata">dictionary containing the meta tags on the storage item</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the arguments are null</exception>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.ProxyCredentials">
+            <summary>
+            ProxyCredentials
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.ProxyCredentials.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="proxyAddress"></param>
+            <param name="proxyUsername"></param>
+            <param name="proxyPassword"></param>
+            <param name="proxyDomain"></param>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.ProxyCredentials.ProxyDomain">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.ProxyCredentials.ProxyPassword">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.ProxyCredentials.ProxyUsername">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.ProxyCredentials.ProxyAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.CreateContainer">
+            <summary>
+            CreateContainer
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.CreateContainer.#ctor(System.String,System.String)">
+            <summary>
+            CreateContainer constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference arguments are null</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.ContainerNameException">Thrown when the container name is invalid</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.StorageItemNameException">Thrown when the object name is invalid</exception>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.request.PutStorageItem">
+            <summary>
+            PutStorageItem
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.PutStorageItem.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            PutStorageItem constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <param name="remoteStorageItemName">the name of the storage item to add meta information too</param>
+            <param name="localFilePath">the path of the file to put into cloudfiles</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.PutStorageItem.#ctor(System.String,System.String,System.String,System.IO.Stream)">
+            <summary>
+            PutStorageItem constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <param name="remoteStorageItemName">the name of the storage item to add meta information too</param>
+            <param name="filestream">the fiel stream of the file to put into cloudfiles</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.PutStorageItem.#ctor(System.String,System.String,System.String,System.IO.Stream,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            PutStorageItem constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <param name="remoteStorageItemName">the name of the storage item to add meta information too</param>
+            <param name="filetosend">the file stream of the file to put into cloudfiles</param>
+            <param name="metadata">dictionary of meta tags to apply to the storage item</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.ContainerNameException">Thrown when the container name is invalid</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.StorageItemNameException">Thrown when the object name is invalid</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.PutStorageItem.#ctor(System.String,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            PutStorageItem constructor
+            </summary>
+            <param name="storageUrl">the customer unique url to interact with cloudfiles</param>
+            <param name="containerName">the name of the container where the storage item is located</param>
+            <param name="remoteStorageItemName">the name of the storage item to add meta information too</param>
+            <param name="localFilePath">the path of the file to put into cloudfiles</param>
+            <param name="metadata">dictionary of meta tags to apply to the storage item</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.ContainerNameException">Thrown when the container name is invalid</exception>
+            <exception cref="T:com.mosso.cloudfiles.exceptions.StorageItemNameException">Thrown when the object name is invalid</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.request.PutStorageItem.ContentType">
+            <summary>
+            the content type of the storage item
+            </summary>
+            <returns>string representation of the storage item's content type</returns>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.IResponseFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.ResponseFactory">
+            <summary>
+            ResponseFactory
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.ResponseFactory.Create(com.mosso.cloudfiles.domain.request.Interfaces.ICloudFilesRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.IResponseFactoryWithContentBody.Create(com.mosso.cloudfiles.domain.request.Interfaces.ICloudFilesRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.ResponseFactoryWithContentBody">
+            <summary>
+            ResponseFactoryWithContentBody
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.ResponseFactoryWithContentBody.Create(com.mosso.cloudfiles.domain.request.Interfaces.ICloudFilesRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.ContainerAlreadyExistsException">
+            <summary>
+            Thrown when attempting to create a container that already exists in cloudfiles
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.ContainerAlreadyExistsException.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.ContainerAlreadyExistsException.#ctor(System.String)">
+            <summary>
+            A constructor for explaining the nature of the exception
+            </summary>
+            <param name="msg">A message describing the failure</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.ContainerNotFoundException">
+            <summary>
+            This exception is thrown when the requested container does not exist on cloudfiles
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.ContainerNotFoundException.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.ContainerNotFoundException.#ctor(System.String)">
+            <summary>
+            A constructor for describing the missing containing more explicitly
+            </summary>
+            <param name="msg">A message used to explicitly describe the failure when requesting the non-existence container</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.InvalidETagException">
+            <summary>
+            This exception is thrown when an invalid MD5 ETag is supplied with a file being stored on cloudfiles
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.InvalidETagException.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.InvalidETagException.#ctor(System.String)">
+            <summary>
+            A constructor for describing the correct formatting and acceptable value for the ETag header
+            </summary>
+            <param name="msg">Used to more explicitly indicate the reason for failure</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.PreconditionFailedException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.PreconditionFailedException.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.PublicContainerNotFoundException">
+            <summary>
+            This exception is thrown when the requested container has not been made public
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.PublicContainerNotFoundException.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.PublicContainerNotFoundException.#ctor(System.String)">
+            <summary>
+            A constructor for describing the missing containing more explicitly
+            </summary>
+            <param name="msg">A message used to explicitly describe the failure when requesting the non-public container</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.StorageItemNotFoundException">
+            <summary>
+            This exception is thrown when the requested storage item does not exist on cloudfiles in the container specified 
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.StorageItemNotFoundException.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.StorageItemNotFoundException.#ctor(System.String)">
+            <summary>
+            A constructor for more explicitly describing the reason for failure
+            </summary>
+            <param name="msg">The message detailing the failure</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.GetItemListParameters">
+            <summary>
+            enumeration of filters to place on the request url
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.Connection">
+            <summary>
+            This class represents the primary means of interaction between a user and cloudfiles. Methods are provided representing all of the actions
+            one can take against his/her account, such as creating containers and downloading storage objects. 
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            </code>
+            </example>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.#ctor(com.mosso.cloudfiles.domain.UserCredentials)">
+            <summary>
+            A constructor used to create an instance of the Connection class
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            </code>
+            </example>
+            <param name="userCreds">An instance of the UserCredentials class, containing all pertinent authentication information</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetAccountInformation">
+            <summary>
+            This method returns the number of containers and the size, in bytes, of the specified account
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            AccountInformation accountInformation = connection.GetAccountInformation();
+            </code>
+            </example>
+            <returns>An instance of AccountInformation, containing the byte size and number of containers associated with this account</returns>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetAccountInformationJson">
+            <summary>
+            Get account information in json format
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            string jsonReturnValue = connection.GetAccountInformationJson();
+            </code>
+            </example>
+            <returns>JSON serialized format of the account information</returns>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetAccountInformationXml">
+            <summary>
+            Get account information in xml format
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            XmlDocument xmlReturnValue = connection.GetAccountInformationXml();
+            </code>
+            </example>
+            <returns>XML serialized format of the account information</returns>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.CreateContainer(System.String)">
+            <summary>
+            This method is used to create a container on cloudfiles with a given name
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            connection.CreateContainer("container name");
+            </code>
+            </example>
+            <param name="containerName">The desired name of the container</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.DeleteContainer(System.String)">
+            <summary>
+            This method is used to delete a container on cloudfiles
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            connection.DeleteContainer("container name");
+            </code>
+            </example>
+            <param name="containerName">The name of the container to delete</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetContainers">
+            <summary>
+            This method retrieves a list of containers associated with a given account
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            List{string} containers = connection.GetContainers();
+            </code>
+            </example>
+            <returns>An instance of List, containing the names of the containers this account owns</returns>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetContainerItemList(System.String)">
+            <summary>
+            This method retrieves the contents of a container
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            List{string} containerItemList = connection.GetContainerItemList("container name");
+            </code>
+            </example>
+            <param name="containerName">The name of the container</param>
+            <returns>An instance of List, containing the names of the storage objects in the give container</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.MakePath(System.String,System.String)">
+            <summary>
+            This method ensures directory objects created for the entire path
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            connection.MakePath("containername", "/dir1/dir2/dir3/dir4");
+            </code>
+            </example>
+            <param name="containerName">The container to create the directory objects in</param>
+            <param name="path">The path of directory objects to create</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetContainerItemList(System.String,System.Collections.Generic.Dictionary{com.mosso.cloudfiles.GetItemListParameters,System.String})">
+            <summary>
+            This method retrieves the contents of a container
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            Dictionary{GetItemListParameters, string} parameters = new Dictionary{GetItemListParameters, string}();
+            parameters.Add(GetItemListParameters.Limit, 2);
+            parameters.Add(GetItemListParameters.Marker, 1);
+            parameters.Add(GetItemListParameters.Prefix, "a");
+            List{string} containerItemList = connection.GetContainerItemList("container name", parameters);
+            </code>
+            </example>
+            <param name="containerName">The name of the container</param>
+            <param name="parameters">Parameters to feed to the request to filter the returned list</param>
+            <returns>An instance of List, containing the names of the storage objects in the give container</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetContainerInformation(System.String)">
+            <summary>
+            This method retrieves the number of storage objects in a container, and the total size, in bytes, of the container
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            Container container = connection.GetContainerInformation("container name");
+            </code>
+            </example>
+            <param name="containerName">The name of the container to query about</param>
+            <returns>An instance of container, with the number of storage objects contained and total byte allocation</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetContainerInformationJson(System.String)">
+            <summary>
+            JSON serialized format of the container's objects
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            string jsonResponse = connection.GetContainerInformationJson("container name");
+            </code>
+            </example>
+            <param name="containerName">name of the container to get information</param>
+            <returns>json string of object information inside the container</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetContainerInformationXml(System.String)">
+            <summary>
+            XML serialized format of the container's objects
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            XmlDocument xmlResponse = connection.GetContainerInformationXml("container name");
+            </code>
+            </example>
+            <param name="containerName">name of the container to get information</param>
+            <returns>xml document of object information inside the container</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.PutStorageItem(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            This method uploads a storage object to cloudfiles with meta tags
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            Dictionary{string, string} metadata = new Dictionary{string, string}();
+            metadata.Add("key1", "value1");
+            metadata.Add("key2", "value2");
+            metadata.Add("key3", "value3");
+            connection.PutStorageItem("container name", "C:\Local\File\Path\file.txt", metadata);
+            </code>
+            </example>
+            <param name="containerName">The name of the container to put the storage object in</param>
+            <param name="localFilePath">The complete file path of the storage object to be uploaded</param>
+            <param name="metadata">An optional parameter containing a dictionary of meta tags to associate with the storage object</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.PutStorageItem(System.String,System.String)">
+            <summary>
+            This method uploads a storage object to cloudfiles
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            connection.PutStorageItem("container name", "C:\Local\File\Path\file.txt");
+            </code>
+            </example>
+            <param name="containerName">The name of the container to put the storage object in</param>
+            <param name="localFilePath">The complete file path of the storage object to be uploaded</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.PutStorageItem(System.String,System.IO.Stream,System.String)">
+            <summary>
+            This method uploads a storage object to cloudfiles with an alternate name
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            FileInfo file = new FileInfo("C:\Local\File\Path\file.txt");
+            connection.PutStorageItem("container name", file.Open(FileMode.Open), "RemoteFileName.txt");
+            </code>
+            </example>
+            <param name="containerName">The name of the container to put the storage object in</param>
+            <param name="remoteStorageItemName">The alternate name as it will be called on cloudfiles</param>
+            <param name="storageStream">The stream representing the storage item to upload</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.PutStorageItemAsync(System.String,System.IO.Stream,System.String)">
+            <summary>
+            This method uploads a storage object to cloudfiles asychronously
+            </summary>
+            <example>
+            <code>
+            private void transferComplete()
+            {
+                if (InvokeRequired)
+                {
+                    Invoke(new CloseCallback(Close), new object[]{});
+                }
+                else
+                {
+                    if (!IsDisposed)
+                        Close();
+                }
+            }
+            
+            private void fileTransferProgress(int bytesTransferred)
+            {
+               if (InvokeRequired)
+               {
+                   Invoke(new FileProgressCallback(fileTransferProgress), new object[] {bytesTransferred});
+               }
+               else
+               {
+                   System.Console.WriteLine(totalTransferred.ToString());
+                   totalTransferred += bytesTransferred;
+                   bytesTransferredLabel.Text = totalTransferred.ToString();
+                   var progress = (int) ((totalTransferred/filesize)*100.0f);
+                   if(progress &gt; 100)
+                       progress = 100;
+                   transferProgressBar.Value = progress ;
+               }
+            }
+            
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            connection.AddProgressWatcher(fileTransferProgress);
+            connection.OperationComplete += transferComplete;
+            connection.PutStorageItemAsync("container name", "RemoteStorageItem.txt", "RemoteStorageItem.txt");
+            </code>
+            </example>
+            <param name="containerName">The name of the container to put the storage object in</param>
+            <param name="remoteStorageItemName">The alternate name as it will be called on cloudfiles</param>
+            <param name="storageStream">The stream representing the storage item to upload</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.PutStorageItemAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            This method uploads a storage object to cloudfiles asychronously
+            </summary>
+            <example>
+            <code>
+            private void transferComplete()
+            {
+                if (InvokeRequired)
+                {
+                    Invoke(new CloseCallback(Close), new object[]{});
+                }
+                else
+                {
+                    if (!IsDisposed)
+                        Close();
+                }
+            }
+            
+            private void fileTransferProgress(int bytesTransferred)
+            {
+               if (InvokeRequired)
+               {
+                   Invoke(new FileProgressCallback(fileTransferProgress), new object[] {bytesTransferred});
+               }
+               else
+               {
+                   System.Console.WriteLine(totalTransferred.ToString());
+                   totalTransferred += bytesTransferred;
+                   bytesTransferredLabel.Text = totalTransferred.ToString();
+                   var progress = (int) ((totalTransferred/filesize)*100.0f);
+                   if(progress &gt; 100)
+                       progress = 100;
+                   transferProgressBar.Value = progress ;
+               }
+            }
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            Dictionary{string, string} metadata = new Dictionary{string, string}();
+            metadata.Add("key1", "value1");
+            metadata.Add("key2", "value2");
+            metadata.Add("key3", "value3");
+            connection.PutStorageItemAsync("container name", "LocalFileName.txt", metadata);
+            </code>
+            </example>
+            <param name="containerName">The name of the container to put the storage object in</param>
+            <param name="localStorageItemName">The name of the file locally </param>
+            <param name="metadata">An optional parameter containing a dictionary of meta tags to associate with the storage object</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.PutStorageItemAsync(System.String,System.IO.Stream,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            This method uploads a storage object to cloudfiles asychronously
+            </summary>
+            <example>
+            <code>
+            private void transferComplete()
+            {
+                if (InvokeRequired)
+                {
+                    Invoke(new CloseCallback(Close), new object[]{});
+                }
+                else
+                {
+                    if (!IsDisposed)
+                        Close();
+                }
+            }
+            
+            private void fileTransferProgress(int bytesTransferred)
+            {
+               if (InvokeRequired)
+               {
+                   Invoke(new FileProgressCallback(fileTransferProgress), new object[] {bytesTransferred});
+               }
+               else
+               {
+                   System.Console.WriteLine(totalTransferred.ToString());
+                   totalTransferred += bytesTransferred;
+                   bytesTransferredLabel.Text = totalTransferred.ToString();
+                   var progress = (int) ((totalTransferred/filesize)*100.0f);
+                   if(progress &gt; 100)
+                       progress = 100;
+                   transferProgressBar.Value = progress ;
+               }
+            }
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            Dictionary{string, string} metadata = new Dictionary{string, string}();
+            metadata.Add("key1", "value1");
+            metadata.Add("key2", "value2");
+            metadata.Add("key3", "value3");
+            FileInfo file = new FileInfo("C:\Local\File\Path\file.txt");
+            connection.PutStorageItemAsync("container name", file.Open(FileMode.Open), "RemoteFileName.txt", metadata);
+            </code>
+            </example>
+            <param name="containerName">The name of the container to put the storage object in</param>
+            <param name="remoteStorageItemName">The alternate name as it will be called on cloudfiles</param>
+            <param name="storageStream">The stream representing the storage item to upload</param>
+            <param name="metadata">An optional parameter containing a dictionary of meta tags to associate with the storage object</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.PutStorageItemAsync(System.String,System.String)">
+            <summary>
+            This method uploads a storage object to cloudfiles asychronously
+            </summary>
+            <example>
+            <code>
+            private void transferComplete()
+            {
+                if (InvokeRequired)
+                {
+                    Invoke(new CloseCallback(Close), new object[]{});
+                }
+                else
+                {
+                    if (!IsDisposed)
+                        Close();
+                }
+            }
+            
+            private void fileTransferProgress(int bytesTransferred)
+            {
+               if (InvokeRequired)
+               {
+                   Invoke(new FileProgressCallback(fileTransferProgress), new object[] {bytesTransferred});
+               }
+               else
+               {
+                   System.Console.WriteLine(totalTransferred.ToString());
+                   totalTransferred += bytesTransferred;
+                   bytesTransferredLabel.Text = totalTransferred.ToString();
+                   var progress = (int) ((totalTransferred/filesize)*100.0f);
+                   if(progress &gt; 100)
+                       progress = 100;
+                   transferProgressBar.Value = progress ;
+               }
+            }
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            connection.PutStorageItemAsync("container name", "LocalFileName.txt");
+            </code>
+            </example>
+            <param name="containerName">The name of the container to put the storage object in</param>
+            <param name="localStorageItemName">The name of the file locally </param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.PutStorageItem(System.String,System.IO.Stream,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            This method uploads a storage object to cloudfiles with an alternate name
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            Dictionary{string, string} metadata = new Dictionary{string, string}();
+            metadata.Add("key1", "value1");
+            metadata.Add("key2", "value2");
+            metadata.Add("key3", "value3");
+            FileInfo file = new FileInfo("C:\Local\File\Path\file.txt");
+            connection.PutStorageItem("container name", file.Open(FileMode.Open), "RemoteFileName.txt", metadata);
+            </code>
+            </example>
+            <param name="containerName">The name of the container to put the storage object in</param>
+            <param name="storageStream">The file stream to upload</param>
+            <param name="metadata">An optional parameter containing a dictionary of meta tags to associate with the storage object</param>
+            <param name="remoteStorageItemName">The name of the storage object as it will be called on cloudfiles</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.DeleteStorageItem(System.String,System.String)">
+            <summary>
+            This method deletes a storage object in a given container
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            connection.DeleteStorageItem("container name", "RemoteStorageItem.txt");
+            </code>
+            </example>
+            <param name="containerName">The name of the container that contains the storage object</param>
+            <param name="storageItemName">The name of the storage object to delete</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetStorageItem(System.String,System.String)">
+            <summary>
+            This method downloads a storage object from cloudfiles
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            StorageItem storageItem = connection.GetStorageItem("container name", "RemoteStorageItem.txt");
+            </code>
+            </example>
+            <param name="containerName">The name of the container that contains the storage object to retrieve</param>
+            <param name="storageItemName">The name of the storage object to retrieve</param>
+            <returns>An instance of StorageItem with the stream containing the bytes representing the desired storage object</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetStorageItem(System.String,System.String,System.Collections.Generic.Dictionary{com.mosso.cloudfiles.domain.request.RequestHeaderFields,System.String})">
+            <summary>
+            An alternate method for downloading storage objects. This one allows specification of special HTTP 1.1 compliant GET headers
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials); 
+            Dictionary{RequestHeaderFields, string} requestHeaderFields = Dictionary{RequestHeaderFields, string}();
+            string dummy_etag = "5c66108b7543c6f16145e25df9849f7f";
+            requestHeaderFields.Add(RequestHeaderFields.IfMatch, dummy_etag);
+            requestHeaderFields.Add(RequestHeaderFields.IfNoneMatch, dummy_etag);
+            requestHeaderFields.Add(RequestHeaderFields.IfModifiedSince, DateTime.Now.AddDays(6).ToString());
+            requestHeaderFields.Add(RequestHeaderFields.IfUnmodifiedSince, DateTime.Now.AddDays(-6).ToString());
+            requestHeaderFields.Add(RequestHeaderFields.Range, "0-5");
+            StorageItem storageItem = connection.GetStorageItem("container name", "RemoteStorageItem.txt", requestHeaderFields);
+            </code>
+            </example>
+            <param name="containerName">The name of the container that contains the storage object</param>
+            <param name="storageItemName">The name of the storage object</param>
+            <param name="requestHeaderFields">A dictionary containing the special headers and their values</param>
+            <returns>An instance of StorageItem with the stream containing the bytes representing the desired storage object</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetStorageItemAsync(System.String,System.String,System.String)">
+            <summary>
+            This method downloads a storage object from cloudfiles asychronously
+            </summary>
+            <example>
+            <code>
+            private void transferComplete()
+            {
+                if (InvokeRequired)
+                {
+                    Invoke(new CloseCallback(Close), new object[]{});
+                }
+                else
+                {
+                    if (!IsDisposed)
+                        Close();
+                }
+            }
+            
+            private void fileTransferProgress(int bytesTransferred)
+            {
+               if (InvokeRequired)
+               {
+                   Invoke(new FileProgressCallback(fileTransferProgress), new object[] {bytesTransferred});
+               }
+               else
+               {
+                   System.Console.WriteLine(totalTransferred.ToString());
+                   totalTransferred += bytesTransferred;
+                   bytesTransferredLabel.Text = totalTransferred.ToString();
+                   var progress = (int) ((totalTransferred/filesize)*100.0f);
+                   if(progress &gt; 100)
+                       progress = 100;
+                   transferProgressBar.Value = progress ;
+               }
+            }
+            
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            connection.AddProgressWatcher(fileTransferProgress);
+            connection.OperationComplete += transferComplete;
+            connection.GetStorageItemAsync("container name", "RemoteStorageItem.txt", "RemoteStorageItem.txt");
+            </code>
+            </example>
+            <param name="containerName">The name of the container that contains the storage object to retrieve</param>
+            <param name="storageItemName">The name of the storage object to retrieve</param>
+            <param name="localFileName">The name to write the file to on your hard drive. </param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetStorageItemAsync(System.String,System.String,System.String,System.Collections.Generic.Dictionary{com.mosso.cloudfiles.domain.request.RequestHeaderFields,System.String})">
+            <summary>
+            This method downloads a storage object from cloudfiles asychronously
+            </summary>
+            <example>
+            <code>
+            private void transferComplete()
+            {
+                if (InvokeRequired)
+                {
+                    Invoke(new CloseCallback(Close), new object[]{});
+                }
+                else
+                {
+                    if (!IsDisposed)
+                        Close();
+                }
+            }
+            
+            private void fileTransferProgress(int bytesTransferred)
+            {
+               if (InvokeRequired)
+               {
+                   Invoke(new FileProgressCallback(fileTransferProgress), new object[] {bytesTransferred});
+               }
+               else
+               {
+                   System.Console.WriteLine(totalTransferred.ToString());
+                   totalTransferred += bytesTransferred;
+                   bytesTransferredLabel.Text = totalTransferred.ToString();
+                   var progress = (int) ((totalTransferred/filesize)*100.0f);
+                   if(progress &gt; 100)
+                       progress = 100;
+                   transferProgressBar.Value = progress ;
+               }
+            }
+            Dictionary{RequestHeaderFields, string} requestHeaderFields = Dictionary{RequestHeaderFields, string}();
+            string dummy_etag = "5c66108b7543c6f16145e25df9849f7f";
+            requestHeaderFields.Add(RequestHeaderFields.IfMatch, dummy_etag);
+            requestHeaderFields.Add(RequestHeaderFields.IfNoneMatch, dummy_etag);
+            requestHeaderFields.Add(RequestHeaderFields.IfModifiedSince, DateTime.Now.AddDays(6).ToString());
+            requestHeaderFields.Add(RequestHeaderFields.IfUnmodifiedSince, DateTime.Now.AddDays(-6).ToString());
+            requestHeaderFields.Add(RequestHeaderFields.Range, "0-5");
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            connection.AddProgressWatcher(fileTransferProgress);
+            connection.OperationComplete += transferComplete;
+            connection.GetStorageItemAsync("container name", "RemoteStorageItem.txt", "RemoteStorageItem.txt", requestHeaderFields);
+            </code>
+            </example>
+            <param name="containerName">The name of the container that contains the storage object to retrieve</param>
+            <param name="storageItemName">The name of the storage object to retrieve</param>
+            <param name="localFileName">The name to write the file to on your hard drive. </param>
+            <param name="requestHeaderFields">A dictionary containing the special headers and their values</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetStorageItem(System.String,System.String,System.String)">
+            <summary>
+            An alternate method for downloading storage objects from cloudfiles directly to a file name specified in the method
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            StorageItem storageItem = connection.GetStorageItem("container name", "RemoteStorageItem.txt", "C:\Local\File\Path\file.txt");
+            </code>
+            </example>
+            <param name="containerName">The name of the container that contains the storage object to retrieve</param>
+            <param name="storageItemName">The name of the storage object to retrieve</param>
+            <param name="localFileName">The file name to save the storage object into on disk</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetStorageItem(System.String,System.String,System.String,System.Collections.Generic.Dictionary{com.mosso.cloudfiles.domain.request.RequestHeaderFields,System.String})">
+            <summary>
+            An alternate method for downloading storage objects from cloudfiles directly to a file name specified in the method
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            Dictionary{RequestHeaderFields, string} requestHeaderFields = Dictionary{RequestHeaderFields, string}();
+            string dummy_etag = "5c66108b7543c6f16145e25df9849f7f";
+            requestHeaderFields.Add(RequestHeaderFields.IfMatch, dummy_etag);
+            requestHeaderFields.Add(RequestHeaderFields.IfNoneMatch, dummy_etag);
+            requestHeaderFields.Add(RequestHeaderFields.IfModifiedSince, DateTime.Now.AddDays(6).ToString());
+            requestHeaderFields.Add(RequestHeaderFields.IfUnmodifiedSince, DateTime.Now.AddDays(-6).ToString());
+            requestHeaderFields.Add(RequestHeaderFields.Range, "0-5");
+            StorageItem storageItem = connection.GetStorageItem("container name", "RemoteFileName.txt", "C:\Local\File\Path\file.txt", requestHeaderFields);
+            </code>
+            </example>
+            <param name="containerName">The name of the container that contains the storage object to retrieve</param>
+            <param name="storageItemName">The name of the storage object to retrieve</param>
+            <param name="localFileName">The file name to save the storage object into on disk</param>
+            <param name="requestHeaderFields">A dictionary containing the special headers and their values</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.SetStorageItemMetaInformation(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            This method applies meta tags to a storage object on cloudfiles
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            Dictionary{string, string} metadata = new Dictionary{string, string}();
+            metadata.Add("key1", "value1");
+            metadata.Add("key2", "value2");
+            metadata.Add("key3", "value3");
+            connection.SetStorageItemMetaInformation("container name", "C:\Local\File\Path\file.txt", metadata);
+            </code>
+            </example>
+            <param name="containerName">The name of the container containing the storage object</param>
+            <param name="storageItemName">The name of the storage object</param>
+            <param name="metadata">A dictionary containiner key/value pairs representing the meta data for this storage object</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetStorageItemInformation(System.String,System.String)">
+            <summary>
+            This method retrieves meta information and size, in bytes, of a requested storage object
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            StorageItem storageItem = connection.GetStorageItemInformation("container name", "RemoteStorageItem.txt");
+            </code>
+            </example>
+            <param name="containerName">The name of the container that contains the storage object</param>
+            <param name="storageItemName">The name of the storage object</param>
+            <returns>An instance of StorageItem containing the byte size and meta information associated with the container</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetPublicContainers">
+            <summary>
+            This method retrieves the names of the of the containers made public on the CDN
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            List{string} containers = connection.GetPublicContainers();
+            </code>
+            </example>
+            <returns>A list of the public containers</returns>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.MarkContainerAsPublic(System.String,System.Int32)">
+            <summary>
+            This method sets a container as public on the CDN
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            Uri containerPublicUrl = connection.MarkContainerAsPublic("container name", 12345);
+            </code>
+            </example>
+            <param name="containerName">The name of the container to mark public</param>
+            <param name="timeToLiveInSeconds">The maximum time (in seconds) content should be kept alive on the CDN before it checks for freshness.</param>
+            <returns>A string representing the URL of the public container or null</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.MarkContainerAsPublic(System.String)">
+            <summary>
+            This method sets a container as public on the CDN
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            Uri containerPublicUrl = connection.MarkContainerAsPublic("container name");
+            </code>
+            </example>
+            <param name="containerName">The name of the container to mark public</param>
+            <returns>A string representing the URL of the public container or null</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.MarkContainerAsPrivate(System.String)">
+            <summary>
+            This method sets a container as private on the CDN
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            connection.MarkContainerAsPrivate("container name");
+            </code>
+            </example>
+            <param name="containerName">The name of the container to mark public</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetPublicContainerInformation(System.String)">
+            <summary>
+            Retrieves a Container object containing the public CDN information
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            Container container = connection.GetPublicContainerInformation("container name")
+            </code>
+            </example>
+            <param name="containerName">The name of the container to query about</param>
+            <returns>An instance of Container with appropriate CDN information or null</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when any of the reference parameters are null</exception>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.SetDetailsOnPublicContainer(System.String,System.Boolean,System.Int32,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="publiccontainer"></param>
+            <param name="loggingenabled"></param>
+            <param name="ttl"></param>
+            <param name="referreracl"></param>
+            <param name="useragentacl"></param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetPublicAccountInformationXML">
+            <summary>
+            XML serialized format of the public account information
+            </summary>
+            <example>
+            <code>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            XmlDocument xmlResponse = connection.GetPublicAccountInformationXML();
+            </code>
+            </example>
+            <returns>xml document of public account information</returns>
+        </member>
+        <member name="M:com.mosso.cloudfiles.Connection.GetPublicAccountInformationJSON">
+            <summary>
+            JSON serialized format of the public account information
+            </summary>
+            UserCredentials userCredentials = new UserCredentials("username", "api key");
+            IConnection connection = new Connection(userCredentials);
+            string jsonResponse = connection.GetPublicAccountInformationJSON();
+            <returns>json string of public account information</returns>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.StorageItem">
+            <summary>
+            StorageItem
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.StorageItem.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Int64,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="objectName"></param>
+            <param name="metadata"></param>
+            <param name="objectContentType"></param>
+            <param name="contentLength"></param>
+            <param name="lastModified"></param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.StorageItem.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.IO.Stream,System.Int64,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="objectName"></param>
+            <param name="metadata"></param>
+            <param name="objectContentType"></param>
+            <param name="contentStream"></param>
+            <param name="contentLength"></param>
+            <param name="lastModified"></param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.StorageItem.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.StorageItem.FileLength">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.StorageItem.ContentType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.StorageItem.Metadata">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.StorageItem.ObjectStream">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.StorageItem.ObjectName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.domain.UserCredentials">
+            <summary>
+            UserCredentials
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.UserCredentials.#ctor(System.String,System.String)">
+            <summary>
+            Constructor - defaults Auth Url to https://api.mosso.com/auth without proxy credentials
+            </summary>
+            <param name="username">client username to use during authentication</param>
+            <param name="api_access_key">client api access key to use during authentication</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.UserCredentials.#ctor(System.String,System.String,com.mosso.cloudfiles.domain.ProxyCredentials)">
+            <summary>
+            Constructor - defaults Auth Url to https://api.mosso.com/auth with proxy credentials
+            </summary>
+            <param name="username">client username to use during authentication</param>
+            <param name="api_access_key">client api access key to use during authentication</param>
+            <param name="proxyCredentials">credentials to use to obtain access via proxy</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.UserCredentials.#ctor(System.Uri,System.String,System.String,System.String,System.String,com.mosso.cloudfiles.domain.ProxyCredentials)">
+            <summary>
+            UserCredential constructor
+            </summary>
+            <param name="authUrl">url to authenticate against</param>
+            <param name="username">client username to use during authentication</param>
+            <param name="api_access_key">client api access key to use during authentication</param>
+            <param name="cloudversion">version of the cloudfiles system to access</param>
+            <param name="accountName">client account name</param>
+            <param name="proxyCredentials">credentials to use to obtain access via proxy</param>
+            <returns>An instance of UserCredentials</returns>
+        </member>
+        <member name="M:com.mosso.cloudfiles.domain.UserCredentials.#ctor(System.Uri,System.String,System.String,System.String,System.String)">
+            <summary>
+            UserCredential constructor
+            </summary>
+            <param name="authUrl">url to authenticate against</param>
+            <param name="username">client username to use during authentication</param>
+            <param name="api_access_key">client api access key to use during authentication</param>
+            <param name="cloudversion">version of the cloudfiles system to access</param>
+            <param name="accountname">client account name</param>
+            <returns>An instance of UserCredentials</returns>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.UserCredentials.ProxyCredentials">
+            <summary>
+            Proxy Credentials
+            </summary>
+            <returns>An instance of the local proxy credentials</returns>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.UserCredentials.Api_access_key">
+            <summary>
+            api access key to use for authentication
+            </summary>
+            <returns>a string representation of the api access key used to authenticate against the user's account</returns>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.UserCredentials.AccountName">
+            <summary>
+            username to use for authentication
+            </summary>
+            <returns>a string representation of the account name used to authenticate against the user's account</returns>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.UserCredentials.AuthUrl">
+            <summary>
+            the url to authenticate against
+            </summary>
+            <returns>a Uri instance having the url for authentication</returns>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.UserCredentials.Cloudversion">
+            <summary>
+            version of the cloudfiles system
+            </summary>
+            <returns>a string representation of the cloudfiles system version</returns>
+        </member>
+        <member name="P:com.mosso.cloudfiles.domain.UserCredentials.Username">
+            <summary>
+            username to use for authentication
+            </summary>
+            <returns>a string representation of the username used to authenticate against the user's account</returns>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.ContainerNameException">
+            <summary>
+            Thrown when the name of the container is invalid
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.ContainerNameException.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.ContainerNameException.#ctor(System.String)">
+            <summary>
+            A constructor for describing the explicit issue with the container name
+            </summary>
+            <param name="message">A message indicating the explicit issue with the container name.</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.InvalidResponseTypeException">
+            <summary>
+            This exception is thrown when the wrong IResponse type is passed into an instance of ResponseFactory
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.InvalidResponseTypeException.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.InvalidResponseTypeException.#ctor(System.String)">
+            <summary>
+            Used to construct an InvalidResponseTypeException containing the explicit reason for failure
+            </summary>
+            <param name="msg">Used to more explicitly indicate the reason for failure</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.MetaKeyLengthException">
+            <summary>
+            This exception is thrown when the length of the meta key in the meta data header is longer than the maximum allowed length
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.MetaKeyLengthException.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.MetaKeyLengthException.#ctor(System.String)">
+            <summary>
+            A constructor for indicating the explicit reason for failure
+            </summary>
+            <param name="exception">Used to indicate the maximum length allowed by cloudfiles</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.MetaValueLengthException">
+            <summary>
+            This exception is thrown when the length of the meta value in the meta data header is longer than the maximum allowed length
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.MetaValueLengthException.#ctor">
+            <summary>
+            The primary constructor for creating 
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.MetaValueLengthException.#ctor(System.String)">
+            <summary>
+            A constructor for indicating the explicit reason for failure
+            </summary>
+            <param name="exception">Used to explicitly indicate the maximum length allowed by cloudfiles</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.StorageItemNameException">
+            <summary>
+            Thrown when the name of the object is invalid
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.StorageItemNameException.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.StorageItemNameException.#ctor(System.String)">
+            <summary>
+            A constructor for describing the explicit issue with the object name
+            </summary>
+            <param name="message">A message indicating the explicit issue with the container name.</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.utils.Constants">
+            <summary>
+            This class initializes the constants which would be utilized all over the application.
+            </summary>
+        </member>
+        <member name="T:com.mosso.cloudfiles.exceptions.AuthenticationFailedException">
+            <summary>
+            Thrown when the user has incorrect authentication credentials.
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.AuthenticationFailedException.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.exceptions.AuthenticationFailedException.#ctor(System.String)">
+            <summary>
+            A constructor for describing the reason for failure
+            </summary>
+            <param name="exception">A description of why the authentication failed</param>
+        </member>
+        <member name="T:com.mosso.cloudfiles.utils.Log">
+            <summary>
+            the logging class
+            </summary>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.SerializeException(System.Exception)">
+            <summary>
+            serialize the exception
+            </summary>
+            <param name="e">exception to serialize</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Debug(System.Object,System.Object)">
+            <summary>
+            log a message as a debug message
+            </summary>
+            <param name="source">object source</param>
+            <param name="message">message to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Debug(System.Type,System.Object)">
+            <summary>
+            log a message as a debug message
+            </summary>
+            <param name="source">object type</param>
+            <param name="message">message to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Info(System.Object,System.Object)">
+            <summary>
+            log a message as an info message
+            </summary>
+            <param name="source">object source</param>
+            <param name="message">message to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Info(System.Type,System.Object)">
+            <summary>
+            log a message as an info message
+            </summary>
+            <param name="source">object type</param>
+            <param name="message">message to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Warn(System.Object,System.Object)">
+            <summary>
+            log a message as a warn message
+            </summary>
+            <param name="source">object source</param>
+            <param name="message">message to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Warn(System.Type,System.Object)">
+            <summary>
+            log a message as a warn message
+            </summary>
+            <param name="source">object type</param>
+            <param name="message">message to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Error(System.Object,System.Object)">
+            <summary>
+            log a message as an error message
+            </summary>
+            <param name="source">object source</param>
+            <param name="message">message to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Error(System.Type,System.Object)">
+            <summary>
+            log a message as an error message
+            </summary>
+            <param name="source">object type</param>
+            <param name="message">message to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Fatal(System.Object,System.Object)">
+            <summary>
+            log a message as a fatal message
+            </summary>
+            <param name="source">object source</param>
+            <param name="message">message to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Fatal(System.Type,System.Object)">
+            <summary>
+            log a message as a fatal message
+            </summary>
+            <param name="source">object type</param>
+            <param name="message">message to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Debug(System.Object,System.Object,System.Exception)">
+            <summary>
+            log a message as a debug message with an exception
+            </summary>
+            <param name="source">object source</param>
+            <param name="message">message to log</param>
+            <param name="exception">exception to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Debug(System.Type,System.Object,System.Exception)">
+            <summary>
+            log a message as a debug message with an exception
+            </summary>
+            <param name="source">object type</param>
+            <param name="message">message to log</param>
+            <param name="exception">exception to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Info(System.Object,System.Object,System.Exception)">
+            <summary>
+            log a message as an info message with an exception
+            </summary>
+            <param name="source">object source</param>
+            <param name="message">message to log</param>
+            <param name="exception">exception to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Info(System.Type,System.Object,System.Exception)">
+            <summary>
+            log a message as an info message with an exception
+            </summary>
+            <param name="source">object type</param>
+            <param name="message">message to log</param>
+            <param name="exception">exception to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Warn(System.Object,System.Object,System.Exception)">
+            <summary>
+            log a message as a warn message with an exception
+            </summary>
+            <param name="source">object source</param>
+            <param name="message">message to log</param>
+            <param name="exception">exception to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Warn(System.Type,System.Object,System.Exception)">
+            <summary>
+            log a message as a warn message with an exception
+            </summary>
+            <param name="source">object type</param>
+            <param name="message">message to log</param>
+            <param name="exception">exception to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Error(System.Object,System.Object,System.Exception)">
+            <summary>
+            log a message as an error message with an exception
+            </summary>
+            <param name="source">object source</param>
+            <param name="message">message to log</param>
+            <param name="exception">exception to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Error(System.Type,System.Object,System.Exception)">
+            <summary>
+            log a message as an error message with an exception
+            </summary>
+            <param name="source">object type</param>
+            <param name="message">message to log</param>
+            <param name="exception">exception to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Fatal(System.Object,System.Object,System.Exception)">
+            <summary>
+            log a message as a fatal message with an exception
+            </summary>
+            <param name="source">object source</param>
+            <param name="message">message to log</param>
+            <param name="exception">exception to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.Fatal(System.Type,System.Object,System.Exception)">
+            <summary>
+            log a message as a fatal message with an exception
+            </summary>
+            <param name="source">object type</param>
+            <param name="message">message to log</param>
+            <param name="exception">exception to log</param>
+        </member>
+        <member name="M:com.mosso.cloudfiles.utils.Log.EnsureInitialized">
+            <summary>
+            ensures the logging mechanism is initialized
+            </summary>
+        </member>
+    </members>
+</doc>

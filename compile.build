@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project name="upload-to-cf" default="build">
+    <property name="basename" value="upload-to-cf"/>
+    <property name="debug" value="true"/>
+
+    <target name="clean">
+        <delete>
+            <fileset>
+                <include name="bin/*"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="build">
+        <mkdir dir="bin" />
+        <csc target="exe" output="bin/${basename}.exe" debug="${debug}">
+            <sources>
+                <include name="${basename}.cs"/>
+            </sources>
+
+            <references basedir=".">
+              <include name="libs/*.dll"/>
+            </references>
+        </csc>
+
+        <copy todir="bin">
+          <fileset basedir="libs">
+            <include name="*.dll"/>
+          </fileset>
+        </copy>
+    </target>
+
+    <target name="run" depends="build">
+        <exec program="bin/${basename}.exe" basedir="."/>
+    </target>
+</project>
